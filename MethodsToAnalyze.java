@@ -11,11 +11,14 @@ public class MethodsToAnalyze {
 	 * @param value int that may be in array
 	 * @return index where value is found or -1 if not found
 	 */
-	public static int find(int[] array, int value) {
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] == value) {
+	public static int find(int[] array, int value) { // empty: 2 | best: 3 | worst: 2 + n(3) | avg: (3 + n(3)) / 2
+		// int = 1; 1
+		// while (i < array.length); 2
+		for (int i = 0; i < array.length; i++) { //n ( )
+			if (array[i] == value) { // conditional n( 1 )
 				return i;
 			}
+			// i++ 1
 		}
 		return -1;
 	}
@@ -26,10 +29,10 @@ public class MethodsToAnalyze {
 	 * @param oldValue value to replace
 	 * @param newValue new value
 	 */
-	public static void replaceAll(int[] array, int oldValue, int newValue) {
-		int index = find(array, oldValue);
-		while (index > -1) {
-			array[index] = newValue;
+	public static void replaceAll(int[] array, int oldValue, int newValue) { // empty: 4 | best: 4 + n(3) | worst: 
+		int index = find(array, oldValue); // 3
+		while (index > -1) { // 1
+			array[index] = newValue; //
 			index = find(array, oldValue);
 		}
 	}
