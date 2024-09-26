@@ -30,10 +30,11 @@ public class MethodsToAnalyze {
 	 * @param newValue new value
 	 */
 	public static void replaceAll(int[] array, int oldValue, int newValue) { // empty: 4 | best: 4 + n(3) | worst: 
-		int index = find(array, oldValue); // 3
-		while (index > -1) { // 1
-			array[index] = newValue; //
-			index = find(array, oldValue);
+		int index = find(array, oldValue); // 4, best case
+		while (index > -1) { // n(3), includes declaration, array[index] and recheck
+			// avg cost of find(), from best case to worst case, (3 + n(3)) / 2
+			array[index] = newValue; 
+			index = find(array, oldValue); // n(3) / 2
 		}
 	}
 	
@@ -41,15 +42,18 @@ public class MethodsToAnalyze {
 	 * Take an int[] and reorganize it so they are in ascending order.
 	 * @param array ints that need to be ordered 
 	 */
-	public static void sortIt(int[] array) {
-		for (int next = 1; next < array.length; next++) {
-			int value = array[next];
-			int index = next;
-			while (index > 0 && value < array[index - 1]) {
-				array[index] = array[index - 1];
-				index--;
+	public static void sortIt(int[] array) { //
+		// int next = 1; (1)
+		// while (...) 2 + n()
+		for (int next = 1; next < array.length; next++) { // empty: 2 | best: 2 + 7(n - 1) | worst:
+			int value = array[next]; // (1)
+			int index = next; // (1)
+			while (index > 0 && value < array[index - 1]) { // (2)
+				array[index] = array[index - 1]; // (1)
+				index--; // (1)
 			}
-			array[index] = value;
+			array[index] = value; //
+			// next++ (1)
 		}
 	}
 }
